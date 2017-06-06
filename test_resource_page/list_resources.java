@@ -1,3 +1,5 @@
+package seng426.test_resource_page;
+
 import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;

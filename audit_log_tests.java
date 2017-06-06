@@ -1,3 +1,4 @@
+package seng426;
 import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
@@ -9,7 +10,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.By;
 
-public class AuditLogTests {
+public class audit_log_tests {
 	
 	private WebDriver driver;
 	
