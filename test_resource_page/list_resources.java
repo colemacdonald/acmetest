@@ -1,12 +1,12 @@
 import static org.junit.Assert.*;
 
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -173,11 +173,10 @@ public class list_resources {
 	private boolean isElementPresent(By by) {
 	    try {
 	      driver.findElement(by);
-	      return true;
 	    } catch (NoSuchElementException e) {
 	      return false;
 	    }
+	    return true;
 	  }
-
 
 }
