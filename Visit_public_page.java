@@ -107,5 +107,14 @@ public class Visit_public_page {
 		assertTrue(!test);
 		*/
 	}
+	
+	//tests to see if a user can see a blog post
+	@Test
+	public void navigateToBlogPost(){
+		driver.get(baseurl + "/index.html#/");
+	    driver.findElement(By.linkText("Blog")).click();
+	    driver.findElement(By.linkText("Hashing Passwords Using MD5 vs. SHA vs. Bcrypt – by Frank Paul")).click();
+	    assertTrue(isElementPresent(By.cssSelector("div.blog-content > h1")));
+	}
 
 }
