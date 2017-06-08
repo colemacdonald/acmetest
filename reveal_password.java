@@ -111,6 +111,7 @@ public class reveal_password {
 		driver.findElement(By.linkText("ACMEPass")).click();
 		driver.findElement(By.linkText("ACMEPass")).click();
 		
+		//edit first password in table
 		driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/table/tbody/tr[1]/td[7]/div/button[1]/span[1]")).click();
 		
 		//wanted to use but it didnt work -> think because of my (Cole) weblayout (btn is covered by home button)
