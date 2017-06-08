@@ -61,6 +61,11 @@ public class reveal_password {
 		driver.close();
 	}
 
+	/*
+	 * Test that navigates to the ACMEPass page, and attempts to toggle the password 
+	 * between plain text and dots for each password stored.
+	 * For each 'input', it compares the 'type' property which defines which password display method is being used.
+	 */
 	@Test
 	public void testRevealList() {
 		driver.findElement(By.linkText("ACMEPass")).click();
@@ -84,7 +89,7 @@ public class reveal_password {
 				
 				if(passType.equals(newPassType))
 				{
-					fail("Toggle did not work on row " + Integer.toString(i));
+					fail("Toggle failed on row " + Integer.toString(i) + ".");
 				}
 			}
 		}
@@ -92,5 +97,37 @@ public class reveal_password {
 		{
 			fail("No passwords to attempt to reveal.");
 		}
+	}
+	
+	/*
+	 * Test that navigates to the ACMEPass page, and attempts to toggle the 
+	 * password display method in the create/edit menu.
+	 * Takes the password 'input' field, and compares the 'type' property which defines which 
+	 * password display method is being used.
+	 */
+	@Test
+	public void testRevealEdit()
+	{
+		driver.findElement(By.linkText("ACMEPass")).click();
+		driver.findElement(By.linkText("ACMEPass")).click();
+		
+		driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/table/tbody/tr[1]/td[7]/div/button[1]/span[1]")).click();
+		
+		//wanted to use but it didnt work -> think because of my (Cole) weblayout (btn is covered by home button)
+		//driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).click();
+		
+		WebElement modal = driver.findElement(By.cssSelector("div.modal-body"));
+		String modalPath = Helper.generateXPATH(modal, "");
+		
+		WebElement password = driver.findElement(By.id("field_password"));
+		String passType = password.getAttribute("type");
+		driver.findElement(By.xpath(modalPath + "/div[4]/div[1]/div[1]/span")).click();
+		String newPassType = password.getAttribute("type");
+		
+		if(passType.equals(newPassType))
+		{
+			fail("Toggle failed on Create/Edit ACME Pass");
+		}
+
 	}
 }
