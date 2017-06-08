@@ -39,7 +39,7 @@ public class View_password_page {
 	//tests to make sure on password page
 	@Test
 	public void viewPasswordPage(){
-		Helper.logIn(driver, 2);
+		Helper.logIn(driver, 0);
 		driver.findElement(By.linkText("ACMEPass")).click();
 		List<WebElement> table = driver.findElements(By.className("table-responsive"));	
 		assertEquals(1,table.size());
