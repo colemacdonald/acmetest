@@ -128,7 +128,7 @@ public class generate_password {
 	@Test
 	public void testUppercaseOnly()
 	{
-		//disable all but lower case option
+		//disable all but upper case option
 			toggleOption(1);
 			toggleOption(3);
 			toggleOption(4);
