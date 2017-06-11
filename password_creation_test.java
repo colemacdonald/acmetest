@@ -92,7 +92,7 @@ public class password_creation_test {
 	 * Tests the password creation functionality, logged in as registered user but missing the site field
 	 * Passes if the submit button is not clickable/doesn't not allow user to submit
 	 */
-	//@Test
+	@Test
 	public void noSiteTest(){
 		//logIn(driver, 3);
 		Helper.logIn(driver, 0);
@@ -120,7 +120,7 @@ public class password_creation_test {
 	 * Tests the password creation functionality, logged in as registered user but missing the username field
 	 * Passes if the submit button is not clickable/doesn't not allow user to submit
 	 */
-	//@Test
+	@Test
 	public void noNameTest(){
 		//logIn(driver, 3);
 		//driver.findElement(By.linkText("ACMEPass")).click();
@@ -147,7 +147,7 @@ public class password_creation_test {
 	 * Tests the password creation functionality, logged in as registered user but missing the password field
 	 * Passes if the submit button is not clickable/doesn't not allow user to submit
 	 */
-	//@Test
+	@Test
 	public void noPasswordTest(){
 		//logIn(driver, 3);
 		Helper.logIn(driver, 0);

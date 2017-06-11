@@ -2,12 +2,14 @@ package seng426;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -22,7 +24,7 @@ public class password_edit {
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Zac\\bin\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -48,6 +50,8 @@ public class password_edit {
 		driver.findElement(By.linkText("ACMEPass")).click();
 		
 		//Need to grab table to get row with corresponding id, and then click the corresponding edit button
+		WebElement table = driver.findElement(By.className("table-responsive"));
+		String tablePath = Helper.generateXPATH(table, "") + "/table";
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).click();
 		
 		WebElement site = driver.findElement(By.id("field_site"));
@@ -62,10 +66,26 @@ public class password_edit {
 		log.sendKeys("newLogin");
 		password.sendKeys("newPassword");
 		
-		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		driver.findElement(By.cssSelector("button[type='submit']")).sendKeys(Keys.ENTER);
 
 		//need to check correct table row was edited
-
+		//get table rows
+		table = driver.findElement(By.className("table-responsive"));
+		
+		String rowPath = tablePath+"/tbody/tr";
+		List<WebElement> tableRows = driver.findElements(By.xpath(rowPath));
+		
+		//get entries from each row
+		WebElement tmp = tableRows.get(0);
+		List<WebElement> tds = driver.findElements(By.xpath(Helper.generateXPATH(tmp, "") + "/td"));
+		boolean siteMatch = "newSite".equals(tds.get(1).getText());
+		boolean loginMatch = "newLogin".equals(tds.get(2).getText());
+		
+		if(siteMatch && loginMatch){
+			assertTrue(true);
+		} else{
+			assertTrue(false);
+		}
 	}
 	
 	/*
