@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -42,10 +43,8 @@ public class generate_password {
 		driver.findElement(By.linkText("ACMEPass")).click();
 		driver.findElement(By.linkText("ACMEPass")).click();
 		
-		//edit first password in table
-		driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/table/tbody/tr[1]/td[7]/div/button[1]/span[1]")).click();
-		//wanted to use but it didnt work -> think because of my (Cole) weblayout (btn is covered by home button)
-		//driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).click();
+		//open create menu
+		driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
 		
 		WebElement modal = driver.findElement(By.className("modal-body"));
 		

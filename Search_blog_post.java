@@ -11,33 +11,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
-
-//import static org.junit.Assert.*;
-import java.util.regex.Pattern;
-
-import static org.apache.commons.lang3.StringUtils.join;
 
 import java.util.*;
-import java.util.NoSuchElementException;
 
 public class Search_blog_post {
 	
 	private WebDriver driver;
 	private String baseurl = "http://localhost:8080/index.html#/blog-post/1";
 	
-	private boolean isElementPresent(By by) {
-		    try {
-		      driver.findElement(by);
-		      return true;
-		    } catch (NoSuchElementException e) {
-		      return false;
-		    }
-		  }
-	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "/home/dylang/bin/geckodriver");
+		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

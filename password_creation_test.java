@@ -24,7 +24,7 @@ public class password_creation_test {
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Zac\\bin\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -44,7 +44,7 @@ public class password_creation_test {
 	 */
 	@Test
 	public void Validtest() {
-		logIn(driver, 3);
+		Helper.logIn(driver, 3);
 		driver.findElement(By.linkText("ACMEPass")).click();
 		
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
@@ -76,7 +76,7 @@ public class password_creation_test {
 	 */
 	@Test
 	public void noSiteTest(){
-		logIn(driver, 3);
+		Helper.logIn(driver, 3);
 		driver.findElement(By.linkText("ACMEPass")).click();
 		
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
@@ -103,7 +103,7 @@ public class password_creation_test {
 	 */
 	@Test
 	public void noNameTest(){
-		logIn(driver, 3);
+		Helper.logIn(driver, 3);
 		driver.findElement(By.linkText("ACMEPass")).click();
 		
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
@@ -129,7 +129,7 @@ public class password_creation_test {
 	 */
 	@Test
 	public void noPasswordTest(){
-		logIn(driver, 3);
+		Helper.logIn(driver, 3);
 		driver.findElement(By.linkText("ACMEPass")).click();
 		
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
@@ -167,57 +167,4 @@ public class password_creation_test {
 			}
 			return i - 1;
 	}
-	
-	private boolean isElementPresent(By by){
-		try{
-			driver.findElement(by);
-		} catch (NoSuchElementException e){
-			return false;
-		}
-		return true;
-	}
-
-	/*
-	 * sets up WebDriver to log in as
-	 * admin if user is set to 0
-	 * manager if user is set to 1
-	 * employee if user is set to 2
-	 * registered user if user is set to 3
-	 * Not elegant but it works
-	 */
-	private void logIn(WebDriver driver, int user){
-		driver.findElement(By.linkText("Sign in")).click();
-		
-		WebElement username = driver.findElement(By.id("username"));
-		WebElement password = driver.findElement(By.id("password"));
-		
-		if(user==0){
-			//sign in as admin
-			username.sendKeys("admin@acme.com");
-			password.sendKeys("K-10ficile");
-			WebElement modal = driver.findElement(By.className("modal-content"));
-			modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).click();
-		} else if(user==1){
-			//sign in as manager
-			username.sendKeys("jo.thomas@acme.com");
-			password.sendKeys("mustang");
-			WebElement modal = driver.findElement(By.className("modal-content"));
-			modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).click();
-		} else if(user==2){
-			//sign in as employee
-			username.sendKeys("frank.paul@acme.com");
-			password.sendKeys("starwars");
-			WebElement modal = driver.findElement(By.className("modal-content"));
-			modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).click();
-		} else if(user==3){
-			//sign in as registered user
-			//must change log in credentials to match your own created user
-			username.sendKeys("zbroitman@gmail.com");
-			password.sendKeys("acme");
-			WebElement modal = driver.findElement(By.className("modal-content"));
-			modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).click();
-		}
-		
-	}
-
 }

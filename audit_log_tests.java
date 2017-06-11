@@ -18,7 +18,7 @@ public class audit_log_tests {
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Zac\\bin\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
