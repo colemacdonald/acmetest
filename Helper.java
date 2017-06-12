@@ -22,7 +22,7 @@ public class Helper {
 	 */
 	public static void sql(String query) throws Exception{
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/acme", "acme", "acmeapp");	//adjust to your database parameters
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/acme", "acme", "acmeapp"); //Change according to your database credentials
 		Statement st = con.createStatement();
 		st.executeUpdate(query);
 	}
@@ -31,8 +31,14 @@ public class Helper {
 		sql("delete from acmepass");
 	}
 	
-	public static void clickOn(By locator, WebDriver driver, int timeout)
-	{
+	public static void clickOn(By locator, WebDriver driver, int timeout){
+	    final WebDriverWait wait = new WebDriverWait(driver, timeout);
+	    wait.until(ExpectedConditions.refreshed(
+	        ExpectedConditions.elementToBeClickable(locator)));
+	    driver.findElement(locator).click();
+	}
+	
+	public static void sendEnter(By locator, WebDriver driver, int timeout){
 	    final WebDriverWait wait = new WebDriverWait(driver, timeout);
 	    wait.until(ExpectedConditions.refreshed(
 	        ExpectedConditions.elementToBeClickable(locator)));
@@ -81,7 +87,7 @@ public class Helper {
 		 * Not elegant but it works
 		 */
 		public static void logIn(WebDriver driver, int user){
-			driver.findElement(By.linkText("Sign in")).sendKeys(Keys.ENTER);
+			driver.findElement(By.linkText("Sign in")).click();
 			
 			WebElement username = driver.findElement(By.id("username"));
 			WebElement password = driver.findElement(By.id("password"));
@@ -103,9 +109,9 @@ public class Helper {
 			} else if(user==3){
 				//sign in as registered user
 				//must change log in credentials to match your own created user
-				username.sendKeys("zbroitman@gmail.com");
+				username.sendKeys("zbroitman@gmail");
 				password.sendKeys("acme");
 			}
-			driver.findElement(By.xpath(generateXPATH(modal, "") + "/div/div[2]/form/button")).sendKeys(Keys.ENTER);
+			driver.findElement(By.xpath(generateXPATH(modal, "") + "/div/div[2]/form/button")).click();
 		}
 }
