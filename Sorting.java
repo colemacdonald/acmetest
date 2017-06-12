@@ -46,8 +46,9 @@ public class Sorting {
 			driver.findElement(By.id("field_site")).sendKeys(sites[i]);
 			driver.findElement(By.id("field_login")).sendKeys(logins[i]);
 			driver.findElement(By.id("field_password")).sendKeys(passwords[i]);
+			
 			modal = driver.findElement(By.cssSelector("div.modal-footer"));
-			driver.findElement(By.xpath(Helper.generateXPATH(modal, "") + "/button[2]")).click();
+			Helper.clickOn(By.xpath(Helper.generateXPATH(modal, "") + "/button[2]"), driver, 5);
 		}
 	}
 
@@ -172,3 +173,4 @@ public class Sorting {
 	}
 
 }
+
