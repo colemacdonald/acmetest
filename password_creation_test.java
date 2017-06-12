@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,11 +33,16 @@ public class password_creation_test {
 		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
 		
 		driver.get(baseUrl);
+		
+		Helper.logIn(driver, 2);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
+		
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		//driver.quit();
+		driver.quit();
 	}
 
 	/*
@@ -44,11 +50,6 @@ public class password_creation_test {
 	 */
 	@Test
 	public void Validtest() {
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
-		
 		WebElement site = driver.findElement(By.id("field_site"));
 		WebElement log = driver.findElement(By.id("field_login"));
 		WebElement password = driver.findElement(By.id("field_password"));
@@ -56,7 +57,7 @@ public class password_creation_test {
 		site.sendKeys("uvic");
 		log.sendKeys("zac");
 		password.sendKeys("aPassword");
-		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		driver.findElement(By.cssSelector("button[type='submit']")).sendKeys(Keys.ENTER);
 		
 		//get table rows
 		WebElement table = driver.findElement(By.className("table-responsive"));
@@ -76,10 +77,6 @@ public class password_creation_test {
 	 */
 	@Test
 	public void noSiteTest(){
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
 		
 		WebElement log = driver.findElement(By.id("field_login"));
 		WebElement password = driver.findElement(By.id("field_password"));
@@ -103,10 +100,6 @@ public class password_creation_test {
 	 */
 	@Test
 	public void noNameTest(){
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
 		
 		WebElement site = driver.findElement(By.id("field_site"));
 		WebElement password = driver.findElement(By.id("field_password"));
@@ -129,11 +122,6 @@ public class password_creation_test {
 	 */
 	@Test
 	public void noPasswordTest(){
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).click();
-		
 		WebElement site = driver.findElement(By.id("field_site"));
 		WebElement login = driver.findElement(By.id("field_login"));
 		

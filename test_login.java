@@ -37,7 +37,7 @@ public class test_login {
 	@Test
 	public void testLoginSuccess()
 	{
-		driver.findElement(By.linkText("Sign in")).click();
+		driver.findElement(By.linkText("Sign in")).sendKeys(Keys.ENTER);
 		
 		WebElement username = driver.findElement(By.id("username"));
 		WebElement password = driver.findElement(By.id("password"));
@@ -46,7 +46,7 @@ public class test_login {
 		password.sendKeys("K-10ficile");
 		
 		WebElement modal = driver.findElement(By.className("modal-content"));
-		modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).click();
+		modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).sendKeys(Keys.ENTER);
 		
 		try
 		{
@@ -62,7 +62,7 @@ public class test_login {
 	@Test
 	public void testLoginFailure()
 	{
-		driver.findElement(By.linkText("Sign in")).click();
+		driver.findElement(By.linkText("Sign in")).sendKeys(Keys.ENTER);
 		
 		WebElement username = driver.findElement(By.id("username"));
 		WebElement password = driver.findElement(By.id("password"));
@@ -71,7 +71,7 @@ public class test_login {
 		password.sendKeys("pword");
 		
 		WebElement modal = driver.findElement(By.className("modal-content"));
-		modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).click();
+		modal.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button")).sendKeys(Keys.ENTER);
 		
 		try
 		{

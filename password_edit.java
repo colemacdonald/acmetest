@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -44,11 +45,11 @@ public class password_edit {
 	 */
 	@Test
 	public void validEditTest() {
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
+		Helper.logIn(driver, 2);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
 		//Need to grab table to get row with corresponding id, and then click the corresponding edit button
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).click();
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
 		
 		WebElement site = driver.findElement(By.id("field_site"));
 		WebElement log = driver.findElement(By.id("field_login"));
@@ -62,7 +63,9 @@ public class password_edit {
 		log.sendKeys("newLogin");
 		password.sendKeys("newPassword");
 		
-		driver.findElement(By.cssSelector("button[type='submit']")).click();
+		driver.findElement(By.cssSelector("button[type='submit']")).sendKeys(Keys.ENTER);
+		
+		driver.findElement(By.id("Sex me"));
 
 		//need to check correct table row was edited
 
@@ -75,10 +78,10 @@ public class password_edit {
 	 */
 	@Test
 	public void noSiteEditTest(){
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
+		Helper.logIn(driver, 2);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).click();
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
 		
 		WebElement site = driver.findElement(By.id("field_site"));
 		WebElement log = driver.findElement(By.id("field_login"));
@@ -107,10 +110,10 @@ public class password_edit {
 	 */
 	@Test
 	public void noUserEditTest(){
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
+		Helper.logIn(driver, 2);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).click();
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
 		
 		WebElement log = driver.findElement(By.id("field_login"));
 		WebElement site = driver.findElement(By.id("field_site"));
@@ -140,10 +143,10 @@ public class password_edit {
 	 */
 	@Test
 	public void noPasswordEditTest(){
-		Helper.logIn(driver, 3);
-		driver.findElement(By.linkText("ACMEPass")).click();
+		Helper.logIn(driver, 2);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).click();
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
 		
 		WebElement password = driver.findElement(By.id("field_password"));
 		WebElement log = driver.findElement(By.id("field_login"));

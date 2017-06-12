@@ -40,8 +40,8 @@ public class generate_password {
 		Helper.logIn(driver, 0);
 		
 		//clicking once wasn't taking me to ACMEPass page
-		driver.findElement(By.linkText("ACMEPass")).click();
-		driver.findElement(By.linkText("ACMEPass")).click();
+		//driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
 		//open create menu
 		driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
@@ -49,7 +49,7 @@ public class generate_password {
 		WebElement modal = driver.findElement(By.className("modal-body"));
 		
 		//click generate button
-		driver.findElement(By.xpath(Helper.generateXPATH(modal, "") + "/div[4]/div[2]/button")).click();
+		driver.findElement(By.xpath(Helper.generateXPATH(modal, "") + "/div[4]/div[2]/button")).sendKeys(Keys.ENTER);
 		//get new modal window
 		generateModal = driver.findElement(By.className("modal-body")); 
 		generateModalPath = Helper.generateXPATH(generateModal, "");
@@ -68,7 +68,7 @@ public class generate_password {
 	 */
 	private String generatePassword()
 	{
-		driver.findElement(By.cssSelector("button.btn.btn-primary")).click();
+		driver.findElement(By.cssSelector("button.btn.btn-primary")).sendKeys(Keys.ENTER);
 		return driver.findElement(By.id("field_password")).getAttribute("value");
 	}
 	
@@ -213,8 +213,8 @@ public class generate_password {
 			String password = generatePassword();
 			
 			//contains at least one of each character
-			if(!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*") || 
-					!password.matches(".*[0-9].*") || !password.matches(".*[!@#$%-_].*"))
+			if(!password.matches(".*[a-z].*") && !password.matches(".*[A-Z].*") && 
+					!password.matches(".*[0-9].*") && !password.matches(".*[!@#$%-_].*"))
 			{
 				fail("Password generated did not contain all necessary character types.\n Generated: " + password);
 			}

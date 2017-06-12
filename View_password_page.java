@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -40,7 +41,7 @@ public class View_password_page {
 	@Test
 	public void viewPasswordPage(){
 		Helper.logIn(driver, 0);
-		driver.findElement(By.linkText("ACMEPass")).click();
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		List<WebElement> table = driver.findElements(By.className("table-responsive"));	
 		assertEquals(1,table.size());
 	}

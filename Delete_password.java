@@ -97,6 +97,8 @@ public class Delete_password {
 		    //driver.findElement(By.xpath("//button[2]")).click();
 		    driver.findElement(By.cssSelector("button.btn.btn-danger")).click();
 		    //driver.findElement(By.cssSelector("button.btn.btn-danger")).click();
+		    table = driver.findElement(By.className("table-responsive"));
+			tablePath = Helper.generateXPATH(table, "") + "/table";
 		    int numPasswordsAfterDeletion = getNumPasswordsOnPage(tablePath);
 			assertTrue(numPasswordsBeforeDeletion > numPasswordsAfterDeletion);
 		}else{
@@ -117,7 +119,8 @@ public class Delete_password {
 		driver.findElement(By.xpath("//button[2]")).click();
 		
 	    
-	    driver.findElement(By.xpath("//button[1]")).click();
+	    //driver.findElement(By.xpath("//button[1]")).click();
+	    driver.findElement(By.cssSelector("button.btn.btn-default")).click();
 	    //driver.findElement(By.xpath("//button[1]")).click();
 	    int numPasswordsAfterNotDeleting = getNumPasswordsOnPage(tablePath);
 	    assertTrue(numPasswordsBeforeDeletion == numPasswordsAfterNotDeleting);

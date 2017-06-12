@@ -81,7 +81,7 @@ public class Helper {
 		 * Not elegant but it works
 		 */
 		public static void logIn(WebDriver driver, int user){
-			driver.findElement(By.linkText("Sign in")).click();
+			driver.findElement(By.linkText("Sign in")).sendKeys(Keys.ENTER);
 			
 			WebElement username = driver.findElement(By.id("username"));
 			WebElement password = driver.findElement(By.id("password"));
@@ -106,6 +106,6 @@ public class Helper {
 				username.sendKeys("zbroitman@gmail");
 				password.sendKeys("acme");
 			}
-			driver.findElement(By.xpath(generateXPATH(modal, "") + "/div/div[2]/form/button")).click();
+			driver.findElement(By.xpath(generateXPATH(modal, "") + "/div/div[2]/form/button")).sendKeys(Keys.ENTER);
 		}
 }

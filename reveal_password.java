@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,8 +69,8 @@ public class reveal_password {
 	 */
 	@Test
 	public void testRevealList() {
-		driver.findElement(By.linkText("ACMEPass")).click();
-		driver.findElement(By.linkText("ACMEPass")).click();
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
 		WebElement table = driver.findElement(By.className("table-responsive"));
 		String tablePath = Helper.generateXPATH(table, "") + "/table";
@@ -84,7 +85,7 @@ public class reveal_password {
 			{
 				String trPath = tablePath + "/tbody/tr[" + Integer.toString(i) + "]";
 				String passType = driver.findElement(By.xpath(trPath + "/td[4]/div/input")).getAttribute("type");
-				driver.findElement(By.xpath(trPath + "/td[4]/div/span")).click();
+				driver.findElement(By.xpath(trPath + "/td[4]/div/span")).sendKeys(Keys.ENTER);
 				String newPassType = driver.findElement(By.xpath(trPath + "/td[4]/div/input")).getAttribute("type");
 				
 				if(passType.equals(newPassType))
@@ -108,14 +109,13 @@ public class reveal_password {
 	@Test
 	public void testRevealEdit()
 	{
-		driver.findElement(By.linkText("ACMEPass")).click();
-		driver.findElement(By.linkText("ACMEPass")).click();
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
 		//edit first password in table
 		driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/table/tbody/tr[1]/td[7]/div/button[1]/span[1]")).click();
 		
 		//wanted to use but it didnt work -> think because of my (Cole) weblayout (btn is covered by home button)
-		//driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).click();
+		//driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
 		
 		WebElement modal = driver.findElement(By.cssSelector("div.modal-body"));
 		String modalPath = Helper.generateXPATH(modal, "");
@@ -127,8 +127,30 @@ public class reveal_password {
 		
 		if(passType.equals(newPassType))
 		{
-			fail("Toggle failed on Create/Edit ACME Pass");
+			fail("Toggle failed on Edit ACME Pass");
 		}
 
+	}
+	
+	@Test
+	public void testRevealCreate()
+	{
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
+		
+		driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
+		
+		WebElement modal = driver.findElement(By.cssSelector("div.modal-body"));
+		String modalPath = Helper.generateXPATH(modal, "");
+		
+		WebElement password = driver.findElement(By.id("field_password"));
+		password.sendKeys("testpwd");
+		String passType = password.getAttribute("type");
+		driver.findElement(By.xpath(modalPath + "/div[4]/div[1]/div[1]/span")).click();
+		String newPassType = password.getAttribute("type");
+		
+		if(passType.equals(newPassType))
+		{
+			fail("Toggle failed on Create ACME Pass");
+		}
 	}
 }

@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -57,7 +58,7 @@ public class Visit_public_page {
 	@Test
 	public void navigateToBlog(){
 		//code taken from lab
-		driver.findElement(By.linkText("Blog")).click();
+		driver.findElement(By.linkText("Blog")).sendKeys(Keys.ENTER);
 		driver.findElement(By.cssSelector("img.img-responsive"));
 		
 		List<WebElement> elements = driver.findElements(By.cssSelector("#media > .container a"));
@@ -69,14 +70,14 @@ public class Visit_public_page {
 	//tests to make sure on Company Page
 	@Test 
 	public void navigateToCompany(){
-		driver.findElement(By.linkText("Company")).click();
+		driver.findElement(By.linkText("Company")).sendKeys(Keys.ENTER);
 		assertEquals("About Us", driver.findElement(By.cssSelector("div > h1")).getText());
 	}
 	
 	//tests to see if product on product page
 	@Test
 	public void navigateToProduct(){
-		driver.findElement(By.linkText("Products")).click();
+		driver.findElement(By.linkText("Products")).sendKeys(Keys.ENTER);
 	    assertEquals("POSEIDON® technology, utilizing the constructive key management standard, protects information down to the object level. It can secure any object from a field in a healthcare claim form—to a selected portion of a Microsoft® Word Document—to an entire file of real-time, streaming digital media. POSEIDON® is at the core of an advanced Role Based Access Control (RBAC) system that allows secured information to be shared among groups of users, each group having different levels of access to the secured information. POSEIDON® encrypts at the information level and manages information sharing relationships via cryptography. It is well understood that network perimeter defenses (firewalls, anti-virus, etc.) must be supplemented with the protection of the network content and ACME’s POSEIDON® products and solutions provide the protection of the content to effectively supplement network defenses.", driver.findElement(By.xpath("//section[@id='products']/div/div/p[2]")).getText());
 	    //assertTrue(isElementPresent(By.cssSelector("img.img-responsive")));
 	  
@@ -85,7 +86,7 @@ public class Visit_public_page {
 	//tests to see if on technology page
 	@Test
 	public void navigateToTechnology(){
-		driver.findElement(By.linkText("Technology")).click();
+		driver.findElement(By.linkText("Technology")).sendKeys(Keys.ENTER);
 		assertEquals("ACME has actively participated in the National Science Foundation’s call to arms – that America’s leading scientists and inventors must move toward measures that will ensure Privacy and Security in this increasingly Connected World. From the Connected Homes & Families through mobile computing and communication platforms, to Connected Cars utilizing roadside wireless infrastructures, to Connected Critical Infrastructure securing power grids and improving our ability to monitor and actively utilize airspace, ACME is providing solutions through POSEIDON,S the next generation Internet of Things (IoT) security technology.", driver.findElement(By.cssSelector("div.col-md-8 > p")).getText());
 	}
 	
@@ -106,8 +107,8 @@ public class Visit_public_page {
 	@Test
 	public void navigateToBlogPost(){
 		driver.get(baseurl + "/index.html#/");
-	    driver.findElement(By.linkText("Blog")).click();
-	    driver.findElement(By.linkText("Hashing Passwords Using MD5 vs. SHA vs. Bcrypt – by Frank Paul")).click();
+	    driver.findElement(By.linkText("Blog")).sendKeys(Keys.ENTER);
+	    driver.findElement(By.linkText("Hashing Passwords Using MD5 vs. SHA vs. Bcrypt – by Frank Paul")).sendKeys(Keys.ENTER);
 	    assertTrue(isElementPresent(By.cssSelector("div.blog-content > h1")));
 	}
 
