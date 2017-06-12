@@ -70,14 +70,11 @@ public class reveal_password {
 	@Test
 	public void testRevealList() {
 		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
-		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
 		WebElement table = driver.findElement(By.className("table-responsive"));
 		String tablePath = Helper.generateXPATH(table, "") + "/table";
 		
 		int numPasswords = getNumPasswordsOnPage(tablePath);
-		
-		//System.out.printf("%d\n", numPasswords);
 		
 		if(numPasswords > 0)
 		{
@@ -102,7 +99,7 @@ public class reveal_password {
 	
 	/*
 	 * Test that navigates to the ACMEPass page, and attempts to toggle the 
-	 * password display method in the create/edit menu.
+	 * password display method in the edit menu.
 	 * Takes the password 'input' field, and compares the 'type' property which defines which 
 	 * password display method is being used.
 	 */
@@ -111,11 +108,8 @@ public class reveal_password {
 	{
 		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
-		//edit first password in table
-		driver.findElement(By.xpath("/html/body/div[3]/div/div/div[2]/table/tbody/tr[1]/td[7]/div/button[1]/span[1]")).click();
-		
-		//wanted to use but it didnt work -> think because of my (Cole) weblayout (btn is covered by home button)
-		//driver.findElement(By.cssSelector("button.btn.btn-primary[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
+		//Need to grab table to get row with corresponding id, and then click the corresponding edit button
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
 		
 		WebElement modal = driver.findElement(By.cssSelector("div.modal-body"));
 		String modalPath = Helper.generateXPATH(modal, "");

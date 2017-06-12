@@ -55,6 +55,9 @@ public class generate_password {
 		generateModalPath = Helper.generateXPATH(generateModal, "");
 	}
 
+	/*
+	 * Will set the length field
+	 */
 	private void setLength(int length)
 	{
 		WebElement lengthField = driver.findElement(By.id("field_length"));
@@ -73,7 +76,7 @@ public class generate_password {
 	}
 	
 	/*
-	 * Will toggle the option in the list specified, beginning at 1
+	 * Will toggle the specified option in the list, beginning at 1
 	 * Acceptable values:		1 <= toToggle <= 5
 	 */
 	private boolean toggleOption(int toToggle)
@@ -124,6 +127,10 @@ public class generate_password {
 		}
 	}
 	
+	/*
+	 * Test generating password with uppercase characters only
+	 * See above for numbers explanation
+	 */
 	@Test
 	public void testUppercaseOnly()
 	{
@@ -143,6 +150,9 @@ public class generate_password {
 			}
 	}
 	
+	/*
+	 * Test generating a password with digits only
+	 */
 	@Test
 	public void testDigitsOnly()
 	{
@@ -162,6 +172,9 @@ public class generate_password {
 		}
 	}
 	
+	/*
+	 * Test generating a password with special characters only
+	 */
 	@Test
 	public void testSpecialCharactersOnly()
 	{
@@ -216,22 +229,30 @@ public class generate_password {
 			if(!password.matches(".*[a-z].*") && !password.matches(".*[A-Z].*") && 
 					!password.matches(".*[0-9].*") && !password.matches(".*[!@#$%-_].*"))
 			{
-				fail("Password generated did not contain all necessary character types.\n Generated: " + password);
+				fail("Password generated did not contain any necessary character types.\n Generated: " + password);
 			}
 		}
 	}
 	
+	/*
+	 * Tests the prevent repeated characters functionality.
+	 * Generates 20 passwords and ensures that none of them contain any duplicate characters.
+	 */
 	@Test
 	public void testPreventRepeats()
 	{
 		//set Prevent Repeated Characters
 		toggleOption(5);
+		setLength(10);
 		
 		for(int i = 0; i < 20; i++)
 		{
 			String password = generatePassword();
 			
 			int l = password.length();
+			
+			if(l != 10)
+				fail("Password generated was of incorrect length.");
 			
 			for(int j = 0; j < l; j++)
 			{
@@ -243,21 +264,5 @@ public class generate_password {
 			}
 		}
 	}
-	
-//	@Test
-//	public void test() {
-//		toggleOption(1);
-//		toggleOption(5);
-//		setLength(5);
-//		System.out.printf("%s\n", generatePassword());
-//		try{
-//			driver.findElement(By.className("stall"));
-//		}
-//		catch(Exception e)
-//		{
-//			
-//		}
-//		fail("Not yet implemented");
-//	}
 
 }
