@@ -103,7 +103,7 @@ public class Helper {
 			} else if(user==3){
 				//sign in as registered user
 				//must change log in credentials to match your own created user
-				username.sendKeys("zbroitman@gmail");
+				username.sendKeys("zbroitman@gmail.com");
 				password.sendKeys("acme");
 			}
 			driver.findElement(By.xpath(generateXPATH(modal, "") + "/div/div[2]/form/button")).sendKeys(Keys.ENTER);
