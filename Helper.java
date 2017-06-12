@@ -22,7 +22,7 @@ public class Helper {
 	 */
 	public static void sql(String query) throws Exception{
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/acme", "acme", "acmeapp"); //Change according to your database credentials
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/acme", "root", ""); //Change according to your database credentials
 		Statement st = con.createStatement();
 		st.executeUpdate(query);
 	}

@@ -22,6 +22,26 @@ public class password_edit {
 	private String 			baseUrl = "http://localhost:8080";
 
 
+	//taken from reveal passwords test and modified
+	private int getNumPasswordsOnPage(String tablePath)
+	{
+			String noPasswordsStored =  "Showing 1 - 0 of 0 items.";
+			if(driver.findElement(By.cssSelector("div.info")).getText().equals(noPasswordsStored)){
+				return 0;
+			}
+				
+			int i = 1;
+			List<WebElement> passlist;
+			String path = tablePath + "/tbody/tr[" + Integer.toString(i) + "]";
+			passlist = driver.findElements(By.xpath(path));
+			while(passlist.size() !=0){
+				i++;
+				path = tablePath + "/tbody/tr[" + Integer.toString(i) + "]";
+				passlist = driver.findElements(By.xpath(path));
+			}
+			return i - 1;		
+		}
+	
 	@Before
 	public void setUp() throws Exception {
 		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
@@ -32,6 +52,19 @@ public class password_edit {
 		driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
 		
 		driver.get(baseUrl);
+		
+		Helper.logIn(driver, 0);
+		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
+		
+		String tablePath = Helper.generateXPATH(driver.findElement(By.className("table-responsive")), "") + "/table";
+		
+		if(getNumPasswordsOnPage(tablePath) <= 0)
+		{
+			fail("No passwords to test with.");
+		}
+		
+		//Need to grab table to get row with corresponding id, and then click the corresponding edit button
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
 	}
 
 	@After
@@ -47,12 +80,6 @@ public class password_edit {
 	@Test
 	public void validEditTest() 
 	{
-		Helper.logIn(driver, 2);
-		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
-		
-		//Need to grab table to get row with corresponding id, and then click the corresponding edit button
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
-
 		WebElement table = driver.findElement(By.className("table-responsive"));
 		String tablePath = Helper.generateXPATH(table, "") + "/table";
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).click();
@@ -74,7 +101,7 @@ public class password_edit {
 		//need to check correct table row was edited
 		//get table rows
 		table = driver.findElement(By.className("table-responsive"));
-		tablePath = Helper.generateXPATH(table, "") + "/table";
+		tablePath = Helper.generateXPATH(driver.findElement(By.className("table-responsive")), "") + "/table";
 		
 		String rowPath = tablePath + "/tbody/tr";
 		List<WebElement> tableRows = driver.findElements(By.xpath(rowPath));
@@ -99,11 +126,6 @@ public class password_edit {
 	 */
 	@Test
 	public void noSiteEditTest(){
-		Helper.logIn(driver, 2);
-		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
-		
 		WebElement site = driver.findElement(By.id("field_site"));
 		WebElement log = driver.findElement(By.id("field_login"));
 		WebElement password = driver.findElement(By.id("field_password"));
@@ -131,11 +153,6 @@ public class password_edit {
 	 */
 	@Test
 	public void noUserEditTest(){
-		Helper.logIn(driver, 2);
-		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
-		
 		WebElement log = driver.findElement(By.id("field_login"));
 		WebElement site = driver.findElement(By.id("field_site"));
 		WebElement password = driver.findElement(By.id("field_password"));
@@ -164,11 +181,6 @@ public class password_edit {
 	 */
 	@Test
 	public void noPasswordEditTest(){
-		Helper.logIn(driver, 2);
-		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).sendKeys(Keys.ENTER);
-		
 		WebElement password = driver.findElement(By.id("field_password"));
 		WebElement log = driver.findElement(By.id("field_login"));
 		WebElement site = driver.findElement(By.id("field_site"));
