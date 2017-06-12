@@ -45,7 +45,8 @@ public class password_edit {
 	 * Password with the same id in the table should be contain the new information to pass
 	 */
 	@Test
-	public void validEditTest() {
+	public void validEditTest() 
+	{
 		Helper.logIn(driver, 2);
 		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
 		
@@ -73,13 +74,14 @@ public class password_edit {
 		//need to check correct table row was edited
 		//get table rows
 		table = driver.findElement(By.className("table-responsive"));
+		tablePath = Helper.generateXPATH(table, "") + "/table";
 		
-		String rowPath = tablePath+"/tbody/tr";
+		String rowPath = tablePath + "/tbody/tr";
 		List<WebElement> tableRows = driver.findElements(By.xpath(rowPath));
 		
 		//get entries from each row
-		WebElement tmp = tableRows.get(0);
-		List<WebElement> tds = driver.findElements(By.xpath(Helper.generateXPATH(tmp, "") + "/td"));
+		//WebElement tmp = tableRows.get(0);
+		List<WebElement> tds = driver.findElements(By.xpath(Helper.generateXPATH(tableRows.get(0), "") + "/td"));
 		boolean siteMatch = "newSite".equals(tds.get(1).getText());
 		boolean loginMatch = "newLogin".equals(tds.get(2).getText());
 		

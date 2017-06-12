@@ -36,10 +36,7 @@ public class password_creation_test {
 		
 		driver.get(baseUrl);
 		
-		Helper.logIn(driver, 2);
-		driver.findElement(By.linkText("ACMEPass")).sendKeys(Keys.ENTER);
-		
-		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
+		Helper.logIn(driver, 0);
 	}
 
 	@After
@@ -70,7 +67,6 @@ public class password_creation_test {
 		//get table rows
 		table = driver.findElement(By.className("table-responsive"));
 
-		
 		//tablePath = Helper.generateXPATH(table, "") + "/table";
 		
 		String rowPath = tablePath+"/tbody/tr";
@@ -148,8 +144,7 @@ public class password_creation_test {
 	 * Passes if the submit button is not clickable/doesn't not allow user to submit
 	 */
 	@Test
-	public void noPasswordTest()
-	{
+	public void noPasswordTest(){
 		driver.get(baseUrl + "/#/acme-pass");
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
 
