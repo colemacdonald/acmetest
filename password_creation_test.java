@@ -27,7 +27,7 @@ public class password_creation_test {
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "/home/dylang/bin/geckodriver");
+		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -53,9 +53,6 @@ public class password_creation_test {
 	@Test
 	public void Validtest() {
 
-		//logIn(driver, 3);
-		Helper.logIn(driver, 0);
-		//driver.findElement(By.linkText("ACMEPass")).click();
 		driver.get(baseUrl + "/#/acme-pass");
 		WebElement table = driver.findElement(By.className("table-responsive"));
 		String tablePath = Helper.generateXPATH(table, "") + "/table";
@@ -100,11 +97,8 @@ public class password_creation_test {
 	 * Passes if the submit button is not clickable/doesn't not allow user to submit
 	 */
 	@Test
-	public void noSiteTest(){
-
-		//logIn(driver, 3);
-		Helper.logIn(driver, 0);
-		//driver.findElement(By.linkText("ACMEPass")).click();
+	public void noSiteTest()
+	{
 		driver.get(baseUrl + "/#/acme-pass");
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
 		
@@ -129,10 +123,8 @@ public class password_creation_test {
 	 * Passes if the submit button is not clickable/doesn't not allow user to submit
 	 */
 	@Test
-	public void noNameTest(){
-		//logIn(driver, 3);
-		//driver.findElement(By.linkText("ACMEPass")).click();
-		Helper.logIn(driver,0);
+	public void noNameTest()
+	{
 		driver.get(baseUrl + "/#/acme-pass");
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
 		
@@ -156,10 +148,8 @@ public class password_creation_test {
 	 * Passes if the submit button is not clickable/doesn't not allow user to submit
 	 */
 	@Test
-	public void noPasswordTest(){
-		//logIn(driver, 3);
-		Helper.logIn(driver, 0);
-		//driver.findElement(By.linkText("ACMEPass")).click();
+	public void noPasswordTest()
+	{
 		driver.get(baseUrl + "/#/acme-pass");
 		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
 
