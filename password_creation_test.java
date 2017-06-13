@@ -27,7 +27,7 @@ public class password_creation_test {
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
+		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");		
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -137,6 +137,33 @@ public class password_creation_test {
 		} else{
 			assertTrue(true);
 		}
+	}
+	
+	/*
+	 * Tests cancelling the creation of a password
+	 * Passes if no new password is created, amount of passwords in table is the same
+	 */
+	@Test
+	public void cancelCreationTest(){
+		//navigate to acme-pass page and find total number of passwords
+		driver.get(baseUrl + "/#/acme-pass");
+		WebElement table = driver.findElement(By.className("table-responsive"));
+		String tablePath = Helper.generateXPATH(table, "") + "/table";
+		int currentPasswordNum = getNumPasswordsOnPage(tablePath);
+
+		//select the create new password button, then the cancel button
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.new']")).sendKeys(Keys.ENTER);
+		driver.findElement(By.cssSelector("button[class = 'btn btn-default']")).sendKeys(Keys.ENTER);
+		
+		//get "new" amount of passwords
+		table = driver.findElement(By.className("table-responsive"));
+		tablePath = Helper.generateXPATH(table, "") + "/table";
+		int newPasswordNum = getNumPasswordsOnPage(tablePath);
+
+		//assert that the two numbers are the same
+		assertTrue(currentPasswordNum==newPasswordNum);
+		
+		
 	}
 	
 	/*

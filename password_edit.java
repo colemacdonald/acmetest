@@ -200,5 +200,33 @@ public class password_edit {
 			assertTrue(true);
 		}
 	}
+	
+	/*
+	 * Tests cancelling the editing of a password
+	 * Passes if no new password is created, amount of passwords in table is the same
+	 */
+	@Test
+	public void cancelEditTest(){
+		//navigate to acme-pass page and find total number of passwords
+		driver.get(baseUrl + "/#/acme-pass");
+		WebElement table = driver.findElement(By.className("table-responsive"));
+		String tablePath = Helper.generateXPATH(table, "") + "/table";
+		int currentPasswordNum = getNumPasswordsOnPage(tablePath);
+		System.out.println("current num is " + currentPasswordNum);
+		
+		//select the edit password button for the first password, then the cancel button
+		driver.findElement(By.cssSelector("button[ui-sref='acme-pass.edit({id:acmePass.id})']")).click();
+		driver.findElement(By.cssSelector("button[type='button']")).sendKeys(Keys.ENTER);
+		
+		//get "new" amount of passwords
+		WebElement table2 = driver.findElement(By.className("table-responsive"));
+		String tablePath2 = Helper.generateXPATH(table2, "") + "/table";
+		int newPasswordNum = getNumPasswordsOnPage(tablePath2);
+		System.out.println("new num is " + newPasswordNum);
+		
+		//assert that the two numbers are the same
+		assertTrue(currentPasswordNum==newPasswordNum);
+		
+	}
 
 }
