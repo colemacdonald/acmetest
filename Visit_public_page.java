@@ -87,7 +87,7 @@ public class Visit_public_page {
 	@Test
 	public void navigateToTechnology(){
 		driver.findElement(By.linkText("Technology")).sendKeys(Keys.ENTER);
-		assertEquals("ACME has actively participated in the National Science Foundation’s call to arms – that America’s leading scientists and inventors must move toward measures that will ensure Privacy and Security in this increasingly Connected World. From the Connected Homes & Families through mobile computing and communication platforms, to Connected Cars utilizing roadside wireless infrastructures, to Connected Critical Infrastructure securing power grids and improving our ability to monitor and actively utilize airspace, ACME is providing solutions through POSEIDON,S the next generation Internet of Things (IoT) security technology.", driver.findElement(By.cssSelector("div.col-md-8 > p")).getText());
+		assertEquals("ACME has actively participated in the National Science Foundation’s call to arms – that America’s leading scientists and inventors must move toward measures that will ensure Privacy and Security in this increasingly Connected World. From the Connected Homes & Families through mobile computing and communication platforms, to Connected Cars utilizing roadside wireless infrastructures, to Connected Critical Infrastructure securing power grids and improving our ability to monitor and actively utilize airspace, ACME is providing solutions through POSEIDON, the next generation Internet of Things (IoT) security technology.", driver.findElement(By.cssSelector("div.col-md-8 > p")).getText());
 	}
 	
 	//tests to see if you can navigate off webpage

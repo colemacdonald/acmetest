@@ -46,7 +46,7 @@ public class Delete_password {
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "/home/dylang/bin/geckodriver");
+		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
