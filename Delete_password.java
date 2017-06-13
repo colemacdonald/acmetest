@@ -82,8 +82,7 @@ public class Delete_password {
 		    }catch(NoSuchElementException e){
 		    	assertTrue(true);
 		    }
-		    //System.out.println(lastPassword);
-		    //assertEquals(0,lastPassword.size());
+		    fail("Did not delete. Same number of rows in table.");
 			
 		}else{
 			fail("Not enough passwords to delete last one");

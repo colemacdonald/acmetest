@@ -161,9 +161,8 @@ public class password_creation_test {
 		int newPasswordNum = getNumPasswordsOnPage(tablePath);
 
 		//assert that the two numbers are the same
-		assertTrue(currentPasswordNum==newPasswordNum);
-		
-		
+		if(currentPasswordNum != newPasswordNum)
+			fail("Number of passwords has changed.");
 	}
 	
 	/*
