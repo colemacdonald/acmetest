@@ -112,7 +112,9 @@ public class Delete_password {
 		    String NewTablePath = Helper.generateXPATH(NewTable, "") + "/table";
 		    int numPasswordsAfterDeletion = getNumPasswordsOnPage(NewTablePath);
 		    System.out.println("Before:" +numPasswordsBeforeDeletion+ "After:"+numPasswordsAfterDeletion);
-			assertTrue(numPasswordsBeforeDeletion > numPasswordsAfterDeletion);
+			
+		    if(numPasswordsBeforeDeletion <= numPasswordsAfterDeletion)
+		    	fail("Deletion failed. Number of passwords remained the same.");
 		}else{
 			fail("No passwords to delete");
 		}
@@ -128,13 +130,15 @@ public class Delete_password {
 		int numPasswordsBeforeDeletion = getNumPasswordsOnPage(tablePath);
 		
 		if (numPasswordsBeforeDeletion  >0){
-		driver.findElement(By.xpath("//button[2]")).sendKeys(Keys.ENTER);
+			driver.findElement(By.xpath("//button[2]")).sendKeys(Keys.ENTER);
 		
 	    
-	    driver.findElement(By.xpath("//button[1]")).sendKeys(Keys.ENTER);
-	    //driver.findElement(By.xpath("//button[1]")).click();
-	    int numPasswordsAfterNotDeleting = getNumPasswordsOnPage(tablePath);
-	    assertTrue(numPasswordsBeforeDeletion == numPasswordsAfterNotDeleting);
+			driver.findElement(By.xpath("//button[1]")).sendKeys(Keys.ENTER);
+			//driver.findElement(By.xpath("//button[1]")).click();
+			int numPasswordsAfterNotDeleting = getNumPasswordsOnPage(tablePath);
+	    
+			if(numPasswordsBeforeDeletion != numPasswordsAfterNotDeleting)
+				fail("Number of passwords has changed.");
 		}else{
 			fail("No passwords to attempt deletion");
 		}
