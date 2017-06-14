@@ -14,9 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /*
- *  *Should add sort test cases!
+ *  Tests resource listing functionality for all user classes
  */
-public class list_resources {
+public class ListResources {
 
 	private WebDriver driver;
 	
