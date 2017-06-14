@@ -17,7 +17,7 @@ import java.util.*;
 
 import seng426.Helper;
 
-public class DeletePassword {
+public class DeletePasswordTest {
 
        /*
 	*Taken from reveal passwords test and modified
