@@ -19,7 +19,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 
-public class password_creation_test {
+public class PasswordCreationTest {
 
 	private WebDriver driver;
 	
