@@ -14,7 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.*;
 
-public class SearchBlogPost {
+public class SearchBlogPostTest {
 	
 	private WebDriver driver;
 	private String baseurl = "http://localhost:8080/index.html#/blog-post/1";
