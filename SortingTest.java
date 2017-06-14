@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Sorting {
+public class SortingTest {
 	private WebDriver driver;
 	private String baseUrl = "http://localhost:8080";
 	private String[] sites = {"acme", "Facebook", "uvic", "Twitter", "Google"};
