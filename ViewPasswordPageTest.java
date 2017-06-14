@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.*;
 import seng426.Helper;
 
-public class ViewPasswordPage {
+public class ViewPasswordPageTest {
 	
 	private WebDriver driver;
 	private String baseurl = "http://localhost:8080";
