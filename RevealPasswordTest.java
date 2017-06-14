@@ -16,7 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import seng426.Helper;
 
-public class reveal_password {
+public class RevealPasswordTest {
 
 	private WebDriver driver;
 	private String baseUrl = "http://localhost:8080";
