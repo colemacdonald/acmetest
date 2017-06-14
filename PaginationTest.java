@@ -16,7 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class PagenationTest {
+public class PaginationTest {
 	private WebDriver driver;
 	private String baseUrl = "http://localhost:8080";
 	private String[] sites = {"acme", "Facebook", "uvic", "Twitter", "Google"};
