@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
 
 import seng426.Helper;
 
-public class AuditLogTests {
+public class AuditLogTest {
 	
 	private WebDriver driver;
 	
