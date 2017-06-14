@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import seng426.Helper;
 
-public class generate_password {
+public class GeneratePassword {
 	
 	private WebDriver 		driver;
 	private String 			baseUrl = "http://localhost:8080";
