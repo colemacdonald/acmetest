@@ -16,7 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /*
  *  Tests resource listing functionality for all user classes
  */
-public class ListResources {
+public class ListResourcesTest {
 
 	private WebDriver driver;
 	
