@@ -16,7 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.*;
 import java.util.NoSuchElementException;
 
-public class Visit_public_page {
+public class VisitPublicPage {
 
 	private WebDriver driver;
 	private String baseurl = "http://localhost:8080";
