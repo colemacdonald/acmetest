@@ -1,4 +1,4 @@
-package seng426.test_resource_page;
+package seng426;
 
 import static org.junit.Assert.*;
 

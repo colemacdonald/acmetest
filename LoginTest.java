@@ -34,6 +34,12 @@ public class LoginTest {
 		driver.close();
 	}
 	
+	/*
+	 * Tests login feature.
+	 * Attempts to sign in using valid credentials and confirms
+	 * success by finding the "account-menu" element which is only
+	 * present if the user is signed in.
+	 */
 	@Test
 	public void testLoginSuccess()
 	{
@@ -59,6 +65,12 @@ public class LoginTest {
 		assertTrue(true);
 	}
 	
+	/*
+	 * Tests login feature.
+	 * Attempts to sign in using invalid credentials and confirms
+	 * failure by attempting to find the "account-menu" element 
+	 * which is only present if the user is signed in.
+	 */
 	@Test
 	public void testLoginFailure()
 	{
