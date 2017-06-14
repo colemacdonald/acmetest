@@ -17,9 +17,11 @@ import java.util.*;
 
 import seng426.Helper;
 
-public class Delete_password {
+public class DeletePassword {
 
-	//taken from reveal passwords test and modified
+       /*
+	*Taken from reveal passwords test and modified
+	*/
 	private int getNumPasswordsOnPage(String tablePath)
 	{
 			String noPasswordsStored =  "Showing 1 - 0 of 0 items.";
