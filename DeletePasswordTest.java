@@ -61,7 +61,7 @@ public class DeletePasswordTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.gecko.driver", "/home/dylang/bin/geckodriver");
+		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
 		driver = new FirefoxDriver();
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -90,18 +90,22 @@ public class DeletePasswordTest {
 		WebElement table = driver.findElement(By.className("table-responsive"));
 		String tablePath = Helper.generateXPATH(table, "") + "/table";
 		
-		int numPasswords = getNumPasswordsOnPage(tablePath);
-		if (numPasswords >1){
-			driver.findElement(By.xpath("//tr[" + numPasswords + "]/td[7]/div/button[2]")).sendKeys(Keys.ENTER);
+		int numPasswordsBeforeDeletion = getNumPasswordsOnPage(tablePath);
+		
+		if (numPasswordsBeforeDeletion >1){
+			driver.findElement(By.xpath("//tr[" + numPasswordsBeforeDeletion + "]/td[7]/div/button[2]")).sendKeys(Keys.ENTER);
 		    
 			wait_function(3);
 		    driver.findElement(By.cssSelector("button.btn.btn-danger")).sendKeys(Keys.ENTER);
 		    
-		    try{
-		    driver.findElement(By.xpath("//tr[" + numPasswords + "]/td[7]/div/button[2]"));	
-		    }catch(NoSuchElementException e){
-		    	assertTrue(true);
-		    }
+		    wait_function(1);
+			
+		    WebElement NewTable = driver.findElement(By.className("table-responsive"));
+		    String NewTablePath = Helper.generateXPATH(NewTable, "") + "/table";
+		    
+		    int numPasswordsAfterDeletion = getNumPasswordsOnPage(NewTablePath);
+		    if(!(numPasswordsBeforeDeletion > numPasswordsAfterDeletion))
+		    	fail("Password not deleted.");
 			
 		}else{
 			fail("Not enough passwords to delete last one");
@@ -120,15 +124,19 @@ public class DeletePasswordTest {
 		int numPasswordsBeforeDeletion = getNumPasswordsOnPage(tablePath);
 		if (numPasswordsBeforeDeletion  >0){
 			driver.findElement(By.xpath("//button[2]")).sendKeys(Keys.ENTER);
-		    driver.findElement(By.cssSelector("button.btn.btn-danger")).sendKeys(Keys.ENTER);
 		    
-		    wait_function(5);
+			wait_function(3);
+			
+			driver.findElement(By.cssSelector("button.btn.btn-danger")).sendKeys(Keys.ENTER);
 		    
+			wait_function(1);
+			
 		    WebElement NewTable = driver.findElement(By.className("table-responsive"));
 		    String NewTablePath = Helper.generateXPATH(NewTable, "") + "/table";
 		    
 		    int numPasswordsAfterDeletion = getNumPasswordsOnPage(NewTablePath);
-		    assertTrue(numPasswordsBeforeDeletion > numPasswordsAfterDeletion);
+		    if(!(numPasswordsBeforeDeletion > numPasswordsAfterDeletion))
+		    	fail("Password not deleted.");
 		
 		}else{
 			fail("No passwords to delete");
